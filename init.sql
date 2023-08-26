@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS pessoas(
-                                     id INT PRIMARY KEY NOT NULL,
+                                     id TEXT PRIMARY KEY not null,
                                      nome varchar(32) NOT NULL,
                                      cpfcnpj varchar(11) NOT NULL,
-                                     nascimento varchar(9) NOT NULL,
+                                     nascimento char(10) NOT NULL,
                                      seguros TEXT NULL
     );

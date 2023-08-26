@@ -17,7 +17,7 @@ func NewPessoaController(service pessoa.Service) *PessoaController {
 }
 
 func (c *PessoaController) Create(ctx *fiber.Ctx) error {
-	var pessoa domain.Pessoa
+	var pessoa *domain.Pessoa
 
 	if err := ctx.BodyParser(&pessoa); err != nil {
 		return err
@@ -28,7 +28,7 @@ func (c *PessoaController) Create(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return ctx.JSON(pessoa)
+	return ctx.JSON(&pessoa)
 }
 
 func (c *PessoaController) Get(ctx *fiber.Ctx) error {
@@ -40,4 +40,15 @@ func (c *PessoaController) Get(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.JSON(pessoa)
+}
+
+func (c *PessoaController) GetByTerm(ctx *fiber.Ctx) error {
+	pessoaTerm := ctx.Query("pessoaTerm")
+
+	pessoas, err := c.service.GetPessoaByTerm(pessoaTerm)
+	if err != nil {
+		return err
+	}
+
+	return ctx.JSON(pessoas)
 }

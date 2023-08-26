@@ -9,5 +9,6 @@ func InitRoutes(app *fiber.App, pessoaController *controller.PessoaController) {
 
 	app.Post("/pessoa", pessoaController.Create)
 	app.Get("/pessoa/:pessoaId", pessoaController.Get)
+	app.Get("/pessoa", pessoaController.GetByTerm)
 
 }
