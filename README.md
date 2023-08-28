@@ -5,3 +5,5 @@ para rodar o projeto ->
 
 docker compose up --build
 
+Endpoints -> do
+

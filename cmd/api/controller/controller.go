@@ -28,7 +28,7 @@ func (c *PessoaController) Create(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return ctx.JSON(&pessoa)
+	return ctx.Status(fiber.StatusCreated).JSON(pessoa)
 }
 
 func (c *PessoaController) Get(ctx *fiber.Ctx) error {
@@ -39,7 +39,7 @@ func (c *PessoaController) Get(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return ctx.JSON(pessoa)
+	return ctx.Status(fiber.StatusOK).JSON(pessoa)
 }
 
 func (c *PessoaController) GetByTerm(ctx *fiber.Ctx) error {
@@ -50,5 +50,5 @@ func (c *PessoaController) GetByTerm(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	return ctx.JSON(pessoas)
+	return ctx.Status(fiber.StatusOK).JSON(pessoas)
 }
