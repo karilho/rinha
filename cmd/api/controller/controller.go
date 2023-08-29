@@ -43,7 +43,7 @@ func (c *PessoaController) Get(ctx *fiber.Ctx) error {
 }
 
 func (c *PessoaController) GetByTerm(ctx *fiber.Ctx) error {
-	pessoaTerm := ctx.Query("pessoaTerm")
+	pessoaTerm := ctx.Query("t")
 
 	pessoas, err := c.service.GetPessoaByTerm(pessoaTerm)
 	if err != nil {

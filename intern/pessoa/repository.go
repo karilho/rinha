@@ -53,12 +53,11 @@ func (r *DatabaseRepository) GetPessoaByID(id string) (p domain.Pessoa, _ error)
 }
 
 func (r *DatabaseRepository) GetPessoaByTerm(term string) (p []domain.Pessoa, _ error) {
-	query := "FROM pessoas WHERE nome LIKE $1 OR seguros LIKE $1 LIMIT 50"
+	query := "FROM pessoas WHERE nome ILIKE $1 OR seguros ILIKE $1 LIMIT 50"
 
 	err := r.db.Query(context.Background(), &p, query, "%"+term+"%")
 	if err != nil {
 		return p, fmt.Errorf("unable to query pessoa: %w", err)
 	}
-
 	return p, nil
 }
