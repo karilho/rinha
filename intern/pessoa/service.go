@@ -12,7 +12,7 @@ func NewService(repo Repository) *Service {
 	}
 }
 
-func (s *Service) CreatePessoa(pessoa *domain.Pessoa) error {
+func (s *Service) CreatePessoa(pessoa *domain.Pessoa) (domain.Pessoa, error) {
 	return s.repo.InsertPessoa(pessoa)
 }
 

@@ -12,7 +12,7 @@ import (
 var pessoasTable = ksql.NewTable("pessoas", "id")
 
 type Repository interface {
-	InsertPessoa(pessoa *domain.Pessoa) error
+	InsertPessoa(pessoa *domain.Pessoa) (domain.Pessoa, error)
 	GetPessoaByID(id string) (domain.Pessoa, error)
 	GetPessoaByTerm(term string) ([]domain.Pessoa, error)
 }
@@ -27,18 +27,17 @@ func NewDatabaseRepository(db ksql.DB) *DatabaseRepository {
 	}
 }
 
-func (r *DatabaseRepository) InsertPessoa(pessoa *domain.Pessoa) error {
+func (r *DatabaseRepository) InsertPessoa(pessoa *domain.Pessoa) (domain.Pessoa, error) {
 	id := uuid.New().String()
-	fmt.Println(id)
 	pessoa.ID = id
-	fmt.Println(pessoa)
+
 	err := r.db.Insert(context.Background(), pessoasTable, pessoa)
 
 	if err != nil {
-		return fmt.Errorf("unable to insert pessoa: %w", err)
+		return *pessoa, fmt.Errorf("unable to insert pessoa: %w", err)
 	}
 
-	return nil
+	return *pessoa, nil
 }
 
 func (r *DatabaseRepository) GetPessoaByID(id string) (p domain.Pessoa, _ error) {
