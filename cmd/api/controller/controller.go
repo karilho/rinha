@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"rinha/intern/domain"
 	"rinha/intern/pessoa"
@@ -49,6 +50,8 @@ func (c *PessoaController) GetByTerm(ctx *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
+
+	fmt.Println("paprapraprap")
 
 	return ctx.Status(fiber.StatusOK).JSON(pessoas)
 }
